@@ -1,0 +1,53 @@
+#import User,Photo,Follow,Likes,Suscription,Comment from './generated/prisma.graphql'; 
+#import Suscriptions,Genders from './generated/prisma.graphql'; 
+
+type Query {
+    users:[User!]!
+    me:User!
+    user(id:String!):User!
+    myfollowers:[Follow!]!
+    myfollows:[Follow!]!
+    allPhotos:[Photo!]!
+}
+
+type Mutation {
+    signup( 
+        full_name:String!, 
+        email:String!, 
+        user_name:String!, 
+        password:String!
+    ):AuthPayload
+
+    login(
+        email:String!,
+        password:String!
+    ):AuthPayload
+
+    upgradeSuscription(
+        suscription_type:Suscriptions!
+    ):User
+
+    updateUser(
+        name:String,
+        lastname:String,
+        password:String,
+        birth_date:String,
+        gender: Genders,
+        avatar:String
+    ):User!
+
+    follow(
+        followedd_id:String!
+    ):Follow!
+
+    postPhoto(
+        url:String!,
+        suscription_type: Suscriptions!,
+        description: String!
+    ):Photo!
+}
+
+type AuthPayload {
+    token: String
+    user: User
+}

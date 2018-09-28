@@ -1,0 +1,66 @@
+type User {
+  id: ID! @unique
+  full_name: String!
+  email:String! @unique
+  user_name:String!
+  password:String!
+  birth_date:DateTime
+  gender:Genders
+  status:Boolean @default(value:true)
+  paypal_id:String
+  suscription:Suscription
+  profile_pic: String @default(value:"https://cdn.onlinewebfonts.com/svg/img_24787.png")
+}
+
+type Followers {
+  id:ID! @unique
+  follower_id: User!
+  time_stamp:DateTime!
+}
+
+type Following {
+  id: ID! @unique
+  following_id: User!
+  time_stamp: DateTime! 
+}
+
+type Photo {
+    id:ID! @unique
+    user:User!
+    url:String!
+    upload_date:DateTime!
+    suscription_type:Suscriptions!
+    likes:Int!
+    description:String!
+}
+
+type Suscription {
+  id:ID! @unique
+  user:User!
+  suscription_type:Suscriptions!
+  end_date:DateTime!
+  price:Int!
+}
+
+type Likes {
+  photo_id:Photo!
+  like_by:User!
+  time_stamp:DateTime!
+}
+
+type Comment {
+  photo_id:Photo!
+  like_by:User!
+  time_stamp:DateTime!
+  comment:String!
+}
+
+enum Suscriptions {
+  FREE
+  PREMIUM
+}
+
+enum Genders {
+    H
+    M
+}

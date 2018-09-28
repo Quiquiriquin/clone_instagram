@@ -1,0 +1,23 @@
+{
+  "name": "clone_instagram_backend",
+  "version": "1.0.0",
+  "description": "Backend for our own instagram",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon nodemon -L src/bin/www",
+    "test": "jest"
+  },
+  "author": "Enrique Alvarez",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^3.0.1",
+    "dotenv": "^6.0.0",
+    "graphql-cli": "^2.16.7",
+    "graphql-yoga": "^1.16.2",
+    "jest": "^23.6.0",
+    "jsonwebtoken": "^8.3.0",
+    "nodemon": "^1.18.4",
+    "prisma": "^1.16.5",
+    "prisma-binding": "^2.1.6"
+  }
+}

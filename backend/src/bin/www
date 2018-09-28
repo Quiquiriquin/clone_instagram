@@ -1,0 +1,11 @@
+#!/usr/bin/env node
+
+var {server} = require('../index');
+
+const PORT = process.env.PORT || 4000;
+
+const options = {
+    port: PORT 
+}
+
+server.start(options, () => console.log("Server is running in http://localhost:4000"));
