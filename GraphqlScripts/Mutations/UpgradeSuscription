@@ -1,0 +1,15 @@
+mutation suscriptionUpgrade{
+  upgradeSuscription(
+    suscription_type:PREMIUM
+  ){
+    id
+    full_name
+    email
+    suscription{
+      id,
+      end_date,
+      suscription_type,
+      price
+    }
+  }	
+}

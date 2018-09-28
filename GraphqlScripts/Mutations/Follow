@@ -1,0 +1,12 @@
+mutation Follow {
+  follow(
+    followedd_id:"cjmjx6csa5hok0b7726mvoavd"
+  ){
+    user_followed{
+      user_name
+    }
+    user_follower{
+      user_name
+    }
+  }
+}

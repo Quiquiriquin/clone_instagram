@@ -1,0 +1,35 @@
+mutation SignUp {
+  signup(
+    full_name:"Karla Silva",
+    email:"karla@gmail.com",
+    user_name:"Karla",
+    password:"Manuel"
+  ){
+    token,
+   	user{
+      full_name,
+      user_name
+    }
+  }
+}
+
+ mutation Login{
+  login(
+    email:"manuel@gmail.com",
+    password:"Manuel"
+  ){
+    token,
+    user{
+      id,
+      email,
+      full_name,
+      suscription{
+        id,
+        end_date,
+        suscription_type,
+        price
+      }
+    }
+  }
+}
+

@@ -1,0 +1,29 @@
+mutation Post{
+  postPhoto(
+    url:"https://photos.app.goo.gl/QYoJrTXogduzgfcY7",
+    suscription_type: FREE,
+    description: "Segunda prueba de Karla"){
+    	url
+    	description
+  		likes
+    	user{
+        user_name
+      }
+  }
+}
+
+mutation Like{
+  likePhoto(
+    photo_id:"cjmlje01va5ey0b77dpxc0zox"
+  ){
+  	photo_id{
+      user{
+        user_name
+      }
+    },
+    like_by{
+      user_name
+    }
+    time_stamp
+  }
+}

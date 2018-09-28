@@ -1,0 +1,15 @@
+query myFollowers{
+  myfollowers{
+    user_follower{
+      user_name
+    }
+  }
+}
+
+query myFollows{
+  myfollows{
+    user_followed{
+      user_name
+    }
+  }
+}

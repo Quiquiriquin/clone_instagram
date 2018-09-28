@@ -1,0 +1,20 @@
+query allUsers{
+  users{
+    id,
+    full_name,
+    email,
+    suscription{
+      suscription_type,
+      end_date
+    }
+  }
+  
+}
+
+query singleUser {
+  user(
+    id:"cjmjx6csa5hok0b7726mvoavd"
+  ){
+    user_name
+  }
+}

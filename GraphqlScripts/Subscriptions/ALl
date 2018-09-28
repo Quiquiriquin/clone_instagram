@@ -1,0 +1,25 @@
+subscription newLike{
+  newLike{
+    node{
+    	photo_id{
+        likes
+      }
+      like_by{
+        user_name
+      }
+  	}
+  }
+}
+
+subscription newFollower{
+  newFollowToMe{
+    node{
+      user_followed{
+        user_name
+      }
+      user_follower{
+        user_name
+      }
+    }
+  }
+}

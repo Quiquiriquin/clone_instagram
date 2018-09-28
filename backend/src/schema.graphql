@@ -45,8 +45,14 @@ type Mutation {
         suscription_type: Suscriptions!,
         description: String!
     ):Photo!
+
+    likePhoto(photo_id:String!):Likes!
 }
 
+type Subscription {
+    newLike:LikesSubscriptionPayload
+    newFollowToMe:FollowSubscriptionPayload
+}
 type AuthPayload {
     token: String
     user: User

@@ -1,0 +1,13 @@
+query AllPhotos{
+  allPhotos{
+    id
+    user{
+      user_name
+    }
+    description
+    likes
+    url
+    upload_date
+  }
+}
+

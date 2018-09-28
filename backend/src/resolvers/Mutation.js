@@ -188,12 +188,26 @@ async function postPhoto(parent, args, context, info){
     return newPhoto;
 }
 
+const queryLike=`{
+    like_by{
+        user_name
+    },
+    photo_id{
+        user{
+            user_name
+        }
+        id,
+        description
+    },
+    time_stamp
+}`
+
 async function likePhoto(parent, args, context, info){
     let id = getUserId(context);
     let newLike = await context.db.mutation.createLikes({
         data:{
             time_stamp: new Date(),
-            liked_by:{
+            like_by:{
                 connect:{
                     id:id
                 }
@@ -204,7 +218,9 @@ async function likePhoto(parent, args, context, info){
                 }
             }
         }
-    })
+    },queryLike)
+
+    return newLike;
 }
 
   module.exports = {
@@ -213,5 +229,6 @@ async function likePhoto(parent, args, context, info){
     upgradeSuscription,
     updateUser,
     follow,
-    postPhoto
+    postPhoto,
+    likePhoto
 }
