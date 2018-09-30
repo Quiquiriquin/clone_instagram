@@ -8,6 +8,8 @@ type Query {
     myfollowers:[Follow!]!
     myfollows:[Follow!]!
     allPhotos:[Photo!]!
+    likesUsers(photo_id:String!):[Likes!]!
+    comments(photo_id:String!):[Comment!]!
 }
 
 type Mutation {
@@ -47,6 +49,8 @@ type Mutation {
     ):Photo!
 
     likePhoto(photo_id:String!):Likes!
+    updateLikes(photo_id:String!):BatchPayLoad!
+    comment(photo_id:String!, comment:String!):Comment!
 }
 
 type Subscription {
@@ -56,4 +60,8 @@ type Subscription {
 type AuthPayload {
     token: String
     user: User
+}
+
+type BatchPayLoad {
+    count: Long
 }

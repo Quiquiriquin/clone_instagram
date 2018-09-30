@@ -42,12 +42,35 @@ async function allPhotos(parent, args, context, info){
     },info)
 }
 
+
+async function likesUsers(parent, args, context, info){  
+    return context.db.query.likeses({
+        where:{
+            photo_id:{
+                id:args.photo_id
+            }
+        }
+    },info)
+}
+
+async function comments(parent, args, context, info){
+    return context.db.query.comments({
+        where:{
+            photo_id:{
+                id:args.id
+            }
+        }
+    },info)
+}
+
 module.exports = {
     users,
     user,
     me,
     myfollowers,
     myfollows,
-    allPhotos
+    allPhotos,
+    likesUsers,
+    comments
 }
 

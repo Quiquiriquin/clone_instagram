@@ -1,5 +1,5 @@
 # source: https://us1.prisma.sh/enrique-alvarez-barajas-c39ae6/instagram_db/dev
-# timestamp: Thu Sep 27 2018 12:06:30 GMT-0500 (CDT)
+# timestamp: Sun Sep 30 2018 01:13:28 GMT-0500 (CDT)
 
 type AggregateComment {
   count: Int!
@@ -32,7 +32,7 @@ type BatchPayload {
 
 type Comment {
   photo_id: Photo!
-  like_by: User!
+  commented_by: User!
   time_stamp: DateTime!
   comment: String!
 }
@@ -51,7 +51,7 @@ input CommentCreateInput {
   time_stamp: DateTime!
   comment: String!
   photo_id: PhotoCreateOneInput!
-  like_by: UserCreateOneInput!
+  commented_by: UserCreateOneInput!
 }
 
 """An edge in a connection."""
@@ -124,7 +124,7 @@ input CommentUpdateInput {
   time_stamp: DateTime
   comment: String
   photo_id: PhotoUpdateOneRequiredInput
-  like_by: UserUpdateOneRequiredInput
+  commented_by: UserUpdateOneRequiredInput
 }
 
 input CommentWhereInput {
@@ -199,7 +199,7 @@ input CommentWhereInput {
   """All values not ending with the given string."""
   comment_not_ends_with: String
   photo_id: PhotoWhereInput
-  like_by: UserWhereInput
+  commented_by: UserWhereInput
 }
 
 scalar DateTime
@@ -516,7 +516,7 @@ input PhotoCreateInput {
   url: String!
   upload_date: DateTime!
   suscription_type: Suscriptions!
-  likes: Int!
+  likes: Int
   description: String!
   user: UserCreateOneInput!
 }

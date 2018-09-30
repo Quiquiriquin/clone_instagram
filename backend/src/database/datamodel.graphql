@@ -13,8 +13,8 @@ type User {
 }
 
 type Follow {
-  user_followed : User! @relation(name: "Followed")
-  user_follower : User! @relation(name: "Follower")
+  user_followed : User! @unique @relation(name: "Followed")
+  user_follower : User! @unique @relation(name: "Follower")
 }
 
 type Photo {
@@ -23,7 +23,7 @@ type Photo {
     url:String!
     upload_date:DateTime!
     suscription_type:Suscriptions!
-    likes:Int!
+    likes:Int! @default(value: 0)
     description:String!
 }
 
@@ -43,7 +43,7 @@ type Likes {
 
 type Comment {
   photo_id:Photo!
-  like_by:User!
+  commented_by:User!
   time_stamp:DateTime!
   comment:String!
 }

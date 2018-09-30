@@ -23,11 +23,6 @@ Date.prototype.addDays = function(days){
     return date;
 }
 
-Date.prototype.todayDay = function(){
-    var date = new Date(this.valueOf());
-    return date;
-}
-
 async function signup(parent,args,context,info) {
     const password = await bcrypt.hash(args.password,10);
 
@@ -86,7 +81,7 @@ async function upgradeSuscription(parent,args,context,info){
             data:{
                 suscription:{
                     update:
-                        {
+                    {
                             suscription_type:args.suscription_type,
                             end_date:new Date().addDays(days),
                             price:PRICES[args.suscription_type]
@@ -119,12 +114,6 @@ async function upgradeSuscription(parent,args,context,info){
 
     return updateUser;
 }
-
-const queryUserFollowers = `{
-    follower_id{
-        user_name
-    }
-}`
 
 const queryFollow = `{
     user_follower{
@@ -196,7 +185,8 @@ const queryLike=`{
         user{
             user_name
         }
-        id,
+        id
+        likes
         description
     },
     time_stamp
@@ -216,11 +206,103 @@ async function likePhoto(parent, args, context, info){
                 connect:{
                     id:args.photo_id
                 }
+                
             }
         }
     },queryLike)
 
     return newLike;
+}
+
+const queryUpdateLikes = `{
+    count
+}`
+
+const queryUpdateLikesOnPhoto = `{
+    likes
+}`
+
+// async function updateLikeOnPhoto(parent,args,context,info){
+//     let id = getUserId(context);
+    
+//     let updateLikeOnPhoto = await context.db.mutation.updatePhoto({
+//         data:{
+//             likes: updateLikes(parent,args,context,info)
+//         },
+//         where:{
+//             id
+//         }
+//     })
+// }
+
+async function likesUserss(parent, args, context, info){  
+    let likes = await context.db.query.likeses({
+        where:{
+            photo_id:{
+                id:args.photo_id
+            }
+        }
+    })
+    console.log(likes.length);
+    return likes.length;
+}
+
+
+async function updateLikes(parent, args, context, info){
+    let id = getUserId(context);
+    let likes = likesUserss(parent, args,context, info);
+    let updateLike = await context.db.mutation.updateManyLikeses({
+        data:{
+            photo_id:{
+                update:{
+                    likes: likes
+                }
+            }
+        },
+        where:{
+            photo_id:{
+                id:args.photo_id
+            }
+        }
+    })
+
+    return updateLike;
+}
+
+const queryComment = `{
+    photo_id{
+        user{
+            user_name
+        }
+        description
+    }
+    time_stamp
+    comment
+    commented_by{
+        user_name
+    }
+}`
+
+async function comment(parent, args, context, info){
+    let id = getUserId(context);
+    let newComment = await context.db.mutation.createComment({
+        data:{
+            time_stamp: new Date(),
+            photo_id:{
+                connect:{
+                    id:args.photo_id
+                }
+            },
+            commented_by:{
+                connect:{
+                    id:id
+                }
+            },
+            comment:args.comment
+        }
+    },queryComment);
+
+    return newComment;
 }
 
   module.exports = {
@@ -230,5 +312,7 @@ async function likePhoto(parent, args, context, info){
     updateUser,
     follow,
     postPhoto,
-    likePhoto
+    likePhoto,
+    updateLikes,
+    comment
 }
